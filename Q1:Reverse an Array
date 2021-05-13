@@ -1,0 +1,25 @@
+#include<iostream>
+using namespace std;
+int* reverseArray(int *arr,int len)
+{
+    int secure,temp=len-1;
+    int condition=len/2;
+    for(int i=0;i<condition;i++)
+    {
+        secure=arr[i];
+        arr[i]=arr[temp];
+        arr[temp]=secure;
+        temp--;
+    }
+    return arr;
+}
+int main()
+{
+    int arr[5]={10,8,9,7,6};
+    int *arr2=reverseArray(arr,5);
+    for(int i=0;i<5;i++)
+    {
+        cout<<arr2[i]<<" ";
+    }
+    return 0;
+}
