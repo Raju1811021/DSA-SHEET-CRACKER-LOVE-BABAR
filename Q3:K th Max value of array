@@ -1,0 +1,68 @@
+#include<iostream>
+#include<stack>
+using namespace std;
+int QuickProcedure(int *arr,int beg,int last)
+{
+    int first=beg;
+    while(last>beg){
+     while(arr[last]>arr[first])
+    {
+        last--;
+    }
+    if(last==first)
+        return(first);
+    if(arr[last]<arr[first])
+    {
+        int temp=arr[first];
+        arr[first]=arr[last];
+        arr[last]=temp;
+        first=last;
+    }
+    while (arr[beg]<arr[first])
+    {
+        beg++;
+    }
+    if(first==beg)
+        return(first);
+    if(arr[beg]>arr[first])
+    {
+        int temp=arr[beg];
+        arr[beg]=arr[first];
+        arr[first]=temp;
+        first=beg;
+    }
+
+    }
+    return(first);
+}
+
+/*Programe to Find K Maximum value*/
+int Kmax(int *arr,int last,int k)
+{
+    int pos=QuickProcedure(arr,0,last);
+    k=5-k;
+    int beg=0,end=last;
+    if(pos==k)
+        return(arr[k]);
+    else{
+        while (pos!=k)
+        {
+            if(pos>k)
+            {
+                end=pos-1;
+                pos=QuickProcedure(arr,beg,end);
+            }
+            else{
+                beg=pos+1;
+                pos=QuickProcedure(arr,beg,end);
+            }
+        }
+        return(arr[pos]);
+    }
+}
+int main()
+{
+    int arr[6]={7,10,4,20,15};
+    cout<<Kmax(arr,4,5);
+    return(0);
+}
