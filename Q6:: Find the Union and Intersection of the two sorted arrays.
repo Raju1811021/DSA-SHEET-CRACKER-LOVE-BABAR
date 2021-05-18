@@ -1,0 +1,55 @@
+#include<iostream>
+using namespace std;
+/*linear Search*/
+int lsearch(int data,int *arr,int n)
+{
+    for(int i=0;i<n;i++){
+        if(data==arr[i])
+        {
+            return(1);
+        }
+    }
+    return(0);
+}
+/*Union of two array*/
+void Union(int *arr1,int *arr2,int *arr3,int n1,int n2)
+{
+    int j=0;
+    for(j=0;j<n1;j++){
+        arr3[j]=arr1[j];
+    }
+    for(int i=0;i<n2;i++)
+    {
+        int temp=lsearch(arr2[i],arr1,n1);
+        if(temp==0){
+            arr3[j]=arr2[i];
+            j++;
+        }
+    }
+    
+}
+//Intersection of tow array
+void Intersection(int *arr1,int *arr2,int *arr3,int n1,int n2)
+{
+    int index=0;
+    for(int i=0;i<n1;i++){
+        int temp=lsearch(arr1[i],arr2,n2);
+        if(temp==1){
+            arr3[index]=arr1[i];
+            index++;
+        }
+    }
+
+}
+int main()
+{
+    int arr1[6]={85,25,1,32,54,6};
+    int arr2[3]={85,25,6}; 
+    int arr3[8];
+    Intersection(arr1,arr2,arr3,6,3);
+    for(int i=0;i<3;i++)
+    {
+        cout<<arr3[i]<<' ';
+    }
+    return(0);
+}
