@@ -1,0 +1,62 @@
+#include<iostream>
+#include<utility>
+#include<bits/stdc++.h>
+#include<cmath>
+using namespace std;
+int minimizeHeight(int *arr,int n,int k){
+    //Making Pair for all possible elemnts
+    int arrIndex=0;
+   vector<pair<int,int>> paired;
+    while (arrIndex<n)
+    {
+        paired.push_back(make_pair(arr[arrIndex]+k,arrIndex));
+        if((arr[arrIndex]-k)>0){
+            paired.push_back(make_pair(arr[arrIndex]-k,arrIndex));
+        }
+        arrIndex++;
+    }
+    
+    //sort pair
+    sort(paired.begin(),paired.end());
+    // for(int i=0;i<7;i++){
+    //     cout<<'('<<paired[i].first<<','<<paired[i].second<<')';
+    // }
+    int result=arr[n-1]-arr[0],element=0,left=0,right=0;
+    int visited[n]={0};
+    while (right<paired.size())
+    {
+        if(element==n){
+            int curr=paired[right-1].first-paired[left].first;
+            if(curr<result){
+                    result=curr;
+                    
+            }
+            visited[left]=0;
+            left++;
+            right=left;
+            element=0;
+            for(int i=0;i<n;i++){
+                visited[i]=0;
+            }
+        }
+        else{
+            if(visited[paired[right].second]==1){
+                right++;
+            }
+            else{
+                visited[paired[right].second]=1;
+                element++;
+                right++;
+            }
+        }
+    }
+    return(result);
+    
+}
+int main()
+{
+    int arr[3]={1,2,3};
+    cout<<minimizeHeight(arr,3,2);
+    return(0);
+
+}
