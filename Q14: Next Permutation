@@ -1,0 +1,46 @@
+#include<iostream>
+#include<utility>
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+void NextPermutation(vector<int>& nums)
+{
+    int i=nums.size()-1;
+    if(nums.size()>1){
+        for(i;i>0;i--){
+            if(nums[i-1]<nums[i]){
+                break;
+            }
+        }
+        if(i==0){
+            int right=nums.size()-1;
+            for(int i=0;i<(nums.size()/2);i++){
+                int temp=nums[i];
+                nums[i]=nums[right];
+                nums[right]=temp;
+                right--;
+            }
+        }
+        else{
+            int j=nums.size();
+            for(j;j>=0;j--){
+                if(nums[j]>nums[i-1]){
+                    int temp=nums[i-1];
+                    nums[i-1]=nums[j];
+                    nums[j]=temp;
+                    break;
+                }
+            }
+        }
+    }
+}
+int main()
+{
+    vector<int> t={1,2};
+    NextPermutation(t);
+    for(int i=0;i<t.size();i++){
+        cout<<t[i]<<',';
+    }
+    return(0);
+
+}
