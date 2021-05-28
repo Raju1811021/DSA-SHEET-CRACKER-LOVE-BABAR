@@ -1,0 +1,46 @@
+
+long long Merge(int *arr,int start,int mid,int end){
+    vector<int> temp;
+    long long invert=0;
+    int n=(mid-start)+1;
+    int START=start,Start2=mid+1;
+    while (START<=mid && Start2<=end)
+    {
+        if(arr[START]<arr[Start2]){
+            temp.push_back(arr[START]);
+            START++;
+        }
+        else{
+            temp.push_back(arr[Start2]);
+            Start2++;
+            invert+=n-START;
+        }
+    }
+    if(START>mid){
+        while(Start2<=end){
+            temp.push_back(arr[Start2]);
+            Start2++;
+        }
+    }
+    if(Start2>end){
+        while(START<=mid){
+            temp.push_back(arr[START]);
+            START++;
+        }
+    }
+    for(int i=0;i<temp.size();i++){
+        arr[start]=temp[i];
+        start++;
+    }
+    return invert;
+}
+long long mergeSort(int *arr,int start,int end){
+   long long  inver=0;
+    if(start<end){
+        int mid=(start+end)/2;
+        inver+=mergeSort(arr,start,mid);
+        inver+=mergeSort(arr,(mid+1),end);
+        inver+=Merge(arr,start,mid,end);
+    }
+    return(inver);
+}
