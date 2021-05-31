@@ -1,0 +1,36 @@
+#include<iostream>
+#include<utility>
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+vector<int> common(int *A,int *B,int *C,int n1,int n2,int n3){
+    vector<int> commo;
+    int last=0;
+    for(int i=0;i<n1;i++){
+        if(binary_search(B,B+n2,A[i]) && binary_search(C,C+n3,A[i])){
+            if(last==0){
+                commo.push_back(A[i]);
+                last++;
+            }
+            else if(commo[last]!=A[i]){
+                commo.push_back(A[i]);
+                last++;
+            }
+        }
+    }
+    return(commo);
+}
+int main()
+{
+    int A[6]={1, 5, 10, 20, 40, 80};
+    int B[5]={6, 7, 20, 80, 100};
+    int C[8]={3, 4, 15, 20, 30, 70, 80, 120};
+    // map<int,int> m;
+    // cout<<m[-1];
+    vector<int> comm=common(A,B,C,6,5,8);
+    for(int i=0;i<comm.size();i++){
+        cout<<comm[i]<<',';
+    }
+    return(0);
+
+}
