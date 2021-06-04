@@ -1,0 +1,28 @@
+#include<iostream>
+#include<utility>
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+long long maxproduct(int *arr,int n){
+    long long min=arr[0],max=arr[0],prod=arr[0];
+    for(int i=1;i<n;i++){
+       if(arr[i]<0){
+           long long temp=min;
+           min=max;
+           max=temp;
+       }
+       max=arr[i]>(arr[i]*max)?arr[i]:arr[i]*max;
+       min=arr[i]<(arr[i]*min)?arr[i]:arr[i]*min;
+       if(max>prod){
+           prod=max;
+       }
+    }
+    return(prod);
+}
+int main()
+{
+    int arr[4]={0,2,1,7};
+    cout<<maxproduct(arr,4);
+    return(0);
+
+}
