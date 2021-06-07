@@ -1,0 +1,25 @@
+#include<iostream>
+#include<utility>
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+string issubarray(int *arr1,int *arr2,int n1,int n2){
+    map<int,int> m;
+    for(int i=0;i<n1;i++){
+        m[arr1[i]]++;
+    }
+    for(int i=0;i<n2;i++){
+        if(!m[arr2[i]]){
+            return("No");
+        }
+    }
+    return("Yes");
+}
+int main()
+{
+    int arr1[5]={10, 5, 2, 23, 19};
+    int arr2[3]={19,5,3};
+    cout<<issubarray(arr1,arr2,5,3);
+    return(0);
+
+}
