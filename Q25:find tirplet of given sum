@@ -1,0 +1,33 @@
+#include<iostream>
+#include<utility>
+#include<bits/stdc++.h>
+#include<algorithm>
+using namespace std;
+bool triplet(int *A,int n,int X){
+    sort(A,A+n);
+    for(int i=0;i<(n-2);i++){
+        int l=i+1,right=n-1;
+        while (l<right)
+        {
+            if((A[i]+A[l]+A[right])==X){
+                return(true);
+            }
+            else if((A[i]+A[l]+A[right])>X){
+                right--;
+            }
+            else if((A[i]+A[l]+A[right])<X){
+                l++;
+            }
+        }
+        
+    }
+    return(false);
+}
+int main()
+{
+    int arr1[5]={1,2,4,3,6};
+    
+    cout<<triplet(arr1,5,10);
+    return(0);
+
+}
