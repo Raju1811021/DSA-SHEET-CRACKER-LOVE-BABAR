@@ -1,0 +1,31 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+ int sb(int arr[], int n, int x)
+{
+    int len=n;
+    int s=0;
+    int i=0,j=0;
+    while (j<=n)
+    {
+        if(s>x){
+            if(len>(j-i)){
+                len=j-i;
+            }
+            s=s-arr[i];
+            i++;
+        }
+        else{
+            s=s+arr[j];
+            j++;
+        }
+    }
+    return(len);
+
+}
+int main(){
+    int arr[]={6,3,4,5,4,3,7,9};
+    cout<<sb(arr,8,16);
+    return(0);
+}
