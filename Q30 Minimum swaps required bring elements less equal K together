@@ -1,0 +1,46 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+int minSwap(int *arr, int n, int k) {
+   int togatather=0;
+   //finding length of array togather arranging less than or equal to k
+   for(int i=0;i<n;i++){
+       if(arr[i]<=k){
+           togatather++;
+       }
+   }
+   if(togatather==0){
+       return(0);
+   }
+   int maxK=0;
+   for(int i=0;i<togatather;i++){
+       if(arr[i]>k){
+           maxK++;
+       }
+   }
+   
+   int i=0,j=togatather-1,mi=maxK;
+   while (j<n)
+   {
+       mi=min(maxK,mi);
+       j++;
+       if(j<n && arr[j]>k){
+           maxK++;
+       }
+       i++;
+       if(arr[i]<=k){
+           maxK--;
+       }
+       
+   }
+    
+   return(mi);
+}
+
+
+int main(){
+    int arr[]={2, 7, 9, 5, 8, 7, 4};
+    cout<<minSwap(arr,7,5);
+    return(0);
+}
