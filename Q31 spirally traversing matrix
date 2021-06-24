@@ -1,0 +1,53 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+//For Problem solving
+vector<int> spiralTraverse(int r,int c,vector<vector<int>> matrix){
+    vector<int> A(r*c);
+    int s=r*c;
+    int direction=0,top=0,down=r-1,left=0,right=c-1,count=0;
+    while (down>=top && right>=left)
+    {
+        if(direction==0){
+            for(int i=left;i<=right;i++){
+                A[count]=matrix[top][i];
+                count++;
+            }
+            top++;
+        }
+        else if(direction==1){
+            for(int i=top;i<=down;i++){
+                A[count]=matrix[i][right];
+                count++;
+            }
+            
+            right--;
+        }
+        else if(direction==2){
+            for(int i=right;i>=left;i--){
+                A[count]=matrix[down][i];
+                count++;
+            }
+            
+            down--;
+        }
+        else if(direction==3){
+            for(int i=down;i>=top;i--){
+                A[count]=matrix[i][left];
+                count++;
+            }
+            left++;
+        }
+        direction=(direction+1)%4;
+    }
+   return(A); 
+
+}
+int main(){
+    vector<vector<int>> matrix={{1, 2, 3, 4},{5, 6, 7, 8},{9, 10, 11, 12}};
+    vector<int> A=spiralTraverse(3,4,matrix);
+    for(int i=0;i<12;i++){
+        cout<<A[i]<<' ';
+    }
+    return(0);
+}
