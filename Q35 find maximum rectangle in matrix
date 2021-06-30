@@ -1,0 +1,71 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+//For Problem solving
+int Histogram(int arr[],int n){
+    stack<int> STACK;
+    int area=0,maxArea=0,i=0;
+    while (i<n)
+    {
+        if(STACK.empty() || arr[i]>=arr[STACK.top()])
+        {
+            STACK.push(i);i++;
+        }
+        else{
+            int top=STACK.top();
+            STACK.pop();
+            if(STACK.empty()){
+                area=arr[top]*i;
+            }
+            else{
+                area=arr[top]*(i-STACK.top()-1);
+            }
+            if(area>maxArea){
+                maxArea=area;
+            }
+        }
+    }
+    while (!STACK.empty())
+    {
+        int top=STACK.top();
+        STACK.pop();
+        if(STACK.empty()){
+            area=arr[top]*i;
+        }
+        else{
+            area=arr[top]*(i-STACK.top()-1);
+        }
+        if(area>maxArea){
+            maxArea=area;
+        }
+    }
+return(maxArea);    
+}
+int maxRE(vector<vector<int>>& M, int n, int m) {
+        int area=0,maxarea=0,i=0;
+        int temp[m]={0};
+        while (i<n)
+        {
+            for(int j=0;j<m;j++){
+                if(M[i][j]==0){
+                    temp[j]=0;
+                }
+                else{
+                    temp[j]=temp[j]+M[i][j];
+                }
+            }
+            area=Histogram(temp,m);
+            if(area>maxarea){
+                maxarea=area;
+            }
+            i++;
+
+        }
+        return(maxarea);
+    }
+    
+int main(){
+    vector<vector<int>> m={{0,1,1,0},{1,1,1,1},{1,1,1,1},{1,1,0,0}};
+    cout<<maxRE(m,4,4);
+    return(0);
+}
